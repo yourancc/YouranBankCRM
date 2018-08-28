@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.youran.domain">
+	<class name="Visit" table="bank_visit">
+		<id name="visit_id">
+			<generator class="native"></generator>
+		</id>
+		<property name="visit_addr" column="visit_addr"></property>
+		<property name="visit_detail" column="visit_detail"></property>
+		<property name="visit_interviewee" column="visit_interviewee"></property>
+		<property name="visit_time" column="visit_time"></property>
+		<property name="visit_nexttime" column="visit_nexttime"></property>
+		<many-to-one name="customer" column="visit_cust_id" class="Customer"></many-to-one>
+		<many-to-one name="user" column="visit_user_id" class="User"></many-to-one>
+		<many-to-one name="linkman" column="visit_lkm_id" class="Linkman"></many-to-one>
+	</class>
+
+</hibernate-mapping>

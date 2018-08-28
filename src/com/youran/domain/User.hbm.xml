@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.youran.domain">
+	<class name="User" table="sys_user" >
+		<id name="user_id" column="user_id">
+			<generator class="native"></generator>
+		</id>
+		<property name="user_code" column="user_code"></property>
+		<property name="user_name" column="user_name"></property>
+		<property name="user_password" column="user_password"></property>
+		<property name="user_state" column="user_state"></property>
+		<property name="user_email" column="user_email"></property>				
+		<property name="user_profile_photo" column="user_profile_photo"></property>
+		<set name="visits" >
+			<key column="visit_lkm_id"></key>
+			<one-to-many class="Visit"/>
+		</set>	
+	</class>
+
+
+</hibernate-mapping>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<constant name="struts.action.extension" value="action,,"></constant>
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.objectFactory" value="spring"></constant>
+	
+	
+	<package name="view" namespace="/" extends="struts-default">		
+		<interceptors>
+		<!-- 注册 拦截器 -->
+		<interceptor name="loginInterceptor" class="com.youran.web.LoginInterceptor"></interceptor>
+		<!-- 拦截器栈  -->
+		<interceptor-stack name="myStack" >
+			<interceptor-ref name="loginInterceptor">
+				<param name="excludeMethods">login,register</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</interceptor-stack>		
+		</interceptors>
+		<!-- 默认拦截器栈 -->
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+		<!-- 默认页面 -->
+		
+		<global-results>
+			<result name="toLogin" type="redirect">/welcome.jsp</result>
+			<result name="error" type="redirect">/error.jsp</result>
+		</global-results>
+
+		<!-- 测试Action -->
+		<action name="t1" class="demoAction" method="execute">
+			<result name="success">/index.jsp</result>
+		</action>
+		<!-- 用户Action -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="success" type="redirectAction">
+				<param name="actionName">console_pandect</param>
+				<param name="namespace">/</param>
+			</result> 
+			<result name="toLogin">/login.jsp</result>
+			<result name="toList">/jsp/system/list.jsp</result>
+			<result name="toProfile">/jsp/system/profile.jsp</result>
+		</action>	
+		<!-- 客户Action -->
+		<action name="customer_*" class="customerAction" method="{1}">
+			<result name="list" type="dispatcher">/jsp/customer/list.jsp</result>
+			 <result name="disToListAction" type="redirectAction">
+				<param name="actionName">customer_list</param>
+				<param name="namespace">/</param>
+			</result> 
+			<result name="toAdd">/jsp/customer/add.jsp</result>
+		</action>
+		<!-- 联系人Action -->
+		<action name="linkman_*" class="linkmanAction" method="{1}">
+			<result name="toList" >/jsp/linkman/list.jsp</result>
+			<result name="toAdd">/jsp/linkman/add.jsp</result>
+			<result name="toAnalyse">/jsp/linkman/analyse.jsp</result>
+			<result name="addError" type="redirect">/page_404.jsp</result>
+			<result name="rToListAction" type="redirectAction">
+				<param name="actionName">linkman_list</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>	
+		<!-- 拜访管理Action -->
+		<action name="visit_*" class="visitAction" method="{1}">
+			<result name="toList" >/jsp/visit/list.jsp</result>
+			<result name="toAdd">/jsp/visit/add.jsp</result>
+			<result name="toAnalyse">/jsp/visit/analyse.jsp</result>
+			<result name="addError" type="redirect">/page_404.jsp</result>
+			<result name="rToListAction" type="redirectAction">
+				<param name="actionName">visit_list</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>	
+		<!-- 商机管理Action -->
+		<action name="chance_*" class="chanceAction" method="{1}">
+			<result name="toList" >/jsp/chance/list.jsp</result>
+			<result name="toAdd">/jsp/chance/add.jsp</result>
+			<result name="toAnalyse">/jsp/chance/analyse.jsp</result>
+			<result name="addError" type="redirect">/page_404.jsp</result>
+			<result name="rToListAction" type="redirectAction">
+				<param name="actionName">chance_list</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>	
+		<!-- 系统Action -->
+		<action name="system_*" class="baseDicAction" method="{1}">
+			<result name="toList">/jsp/system/dictionary.jsp</result>
+		</action>
+		<action name="console_*" class="consoleAction" method="{1}">
+			<result name="toPandect">/jsp/console/schedule.jsp</result>
+		</action>
+	</package>
+</struts>

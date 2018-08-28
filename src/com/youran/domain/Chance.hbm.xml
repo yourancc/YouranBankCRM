@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.youran.domain">
+	<class name="Chance" table="bank_chance">
+		<id name="chan_id">
+			<generator class="native"></generator>
+		</id>
+		<property name="chan_name"></property>
+		<property name="chan_money"></property>
+		<property name="chan_source"></property>
+		<property name="chan_state"></property>
+		<property name="chan_linktime"></property>
+		<property name="chan_desc"></property>
+
+		<many-to-one lazy="false" name="chan_type" column="chan_type" class="BaseDict" ></many-to-one>
+	
+		<many-to-one name="customer" column="chan_cust_id" class="Customer"></many-to-one>
+		<many-to-one name="user" column="chan_user_id" class="User"></many-to-one>
+		<many-to-one name="linkman" column="chan_lkm_id" class="Linkman"></many-to-one>	
+	</class>
+
+</hibernate-mapping>
