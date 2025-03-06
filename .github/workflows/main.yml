@@ -1,0 +1,26 @@
+name: Record Timestamp
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # 每15分钟触发一次
+
+jobs:
+  record_time:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # 使用Python 3.x
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt  # 如果有依赖项
+
+      - name: Run main script
+        run: |
+          python main.py  # 运行主脚本 
